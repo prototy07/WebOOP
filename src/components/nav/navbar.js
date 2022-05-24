@@ -28,7 +28,7 @@ const Navbar = () => {
 
              </li>
              <li class="has-subnav">
-                 <Link to="/False-Position">
+                 <Link to="/FalsePosition">
 
                      <span class="nav-text">
                        False-Position
@@ -37,7 +37,7 @@ const Navbar = () => {
 
              </li>
              <li class="has-subnav">
-                 <Link to="/One-Point Iteration">
+                 <Link to="/OnePoint">
 
                      <span class="nav-text">
                          One-Point Iteration
@@ -48,7 +48,7 @@ const Navbar = () => {
              <li class="has-subnav">
                  <Link to="#">
 
-                     <span class="Newton Raphson">
+                     <span class="nav-text">
                          Newton Raphson
                      </span>
                  </Link>
@@ -57,7 +57,7 @@ const Navbar = () => {
              <li>
                  <Link to="#">
 
-                     <span class="Secant">
+                     <span class="nav-text">
                          Secant
                      </span>
                  </Link>

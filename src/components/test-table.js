@@ -83,10 +83,12 @@ export function Callbisection(x,xl,xr){
             }
             xMold = xM;
 
+            if(iteration >= 1){
             let arraypushG = {x : iteration , y : error}
             arraypushG.x = iteration;
             arraypushG.y = error;
             arrayForG.push(arraypushG)
+            }
 
             let datapush = {count_id: count_id, iteration : iteration, xl: xl, xr: xr, error: error};
             datapush.count_id = count_id;
@@ -114,10 +116,12 @@ export function Callbisection(x,xl,xr){
             }
             xMold = xM;
 
+            if(iteration >= 1){
             let arraypushG = {x : iteration , y : error}
             arraypushG.x = iteration;
             arraypushG.y = error;
             arrayForG.push(arraypushG)
+            }
 
             let datapush = {count_id: count_id, iteration : iteration, xl: xl, xr: xr, error: error};
             datapush.count_id = count_id;

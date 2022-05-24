@@ -30,7 +30,7 @@
     bottom:0;
     height:100%;
     left:0;
-    width:60px;
+    width:280px;
     overflow:hidden;
     -webkit-transition:width .05s linear;
     transition:width .05s linear;
@@ -69,6 +69,7 @@
     width:60px;
     height:36px;
     text-align:center;
+    
     vertical-align:middle;
     font-size:18px;
     }
@@ -77,6 +78,7 @@
     position:relative;
     display:table-cell;
     vertical-align:middle;
+    
     width:190px;
       font-family: 'Titillium Web', sans-serif;
     }
@@ -110,7 +112,7 @@
     
     nav ul,nav li {
     outline:0;
-    margin-left:0px;
+    margin-left:15px;
     padding-bottom:20px;
     }
     .main-menu li:hover>a,nav.main-menu li.active>a,.dropdown-menu>li>a:hover,.dropdown-menu>li>a:focus,.dropdown-menu>.active>a,.dropdown-menu>.active>a:hover,.dropdown-menu>.active>a:focus,.no-touch .dashboard-page nav.dashboard-menu ul li:hover a,.dashboard-page nav.dashboard-menu ul li.active a {
