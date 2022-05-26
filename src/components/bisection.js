@@ -1,31 +1,33 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import "./bisection.css";
 import { Callbisection } from "./test-table";
 
-
-
 const Bisection = () => {
-  const [xl, setxl] = useState("");
-  const [xr, setxr] = useState("");
+  const [isLoaded, setIsLoaded] = useState([]);
+
   const [result, setresult] = useState("");
   const [eq, seteq] = useState("");
+  const equationInputRef = useRef();
+  const xlInputRef = useRef();
+  const xrInputRef = useRef();
 
-  const inputXL = (event) => {
-    setxl(event.target.value);
+  const sendRequest = async () => {
+    const response = await fetch("http://localhost:5000/api/get-bisection");
+    const responseData = await response.json();
+    setIsLoaded(responseData);
   };
-  const inputXR = (event) => {
-    setxr(event.target.value);
-  };
-  const inputEQ = (event) => {
-    seteq(event.target.value)
-  }
+  useEffect(() => {
+    sendRequest();
+  }, []);
+
   const saveItem = (event) => {
     event.preventDefault();
-    let xlfloat = parseFloat(xl);
-    let xrfloat = parseFloat(xr);
-    setresult(Callbisection(eq,xlfloat, xrfloat));
-
-    
+    const enteredEquation = equationInputRef.current.value;
+    const enteredXl = xlInputRef.current.value;
+    const enteredXr = xrInputRef.current.value;
+    let xlfloat = parseFloat(enteredXl);
+    let xrfloat = parseFloat(enteredXr);
+    setresult(Callbisection(enteredEquation, xlfloat, xrfloat));
   };
   return (
     <div className="h1pj">
@@ -36,33 +38,42 @@ const Bisection = () => {
             <label>input EQ</label>
           </div>
 
-          <input
-            type="text"
-            placeholder="input EQ"
-            onChange={inputEQ}
-            value={eq}
-          />
+          <select ref={equationInputRef}>
+            {isLoaded.map((equ, index) => {
+              return (
+                <option
+                  key={index}
+                  value={equ.equation}
+                  label={equ.equation}
+                ></option>
+              );
+            })}
+          </select>
 
           <div>
             <label>input XL</label>
           </div>
 
-          <input
-            type="text"
-            placeholder="input XL"
-            onChange={inputXL}
-            value={xl}
-          />
+          <select ref={xlInputRef}>
+            {isLoaded.map((equXl, index) => {
+              return (
+                <option key={index} value={equXl.xl} label={equXl.xl}></option>
+              );
+            })}
+          </select>
+
           <div>
             <label>input XR</label>
           </div>
 
-          <input
-            type="text"
-            placeholder="input XR"
-            onChange={inputXR}
-            value={xr}
-          />
+          <select ref={xrInputRef}>
+            {isLoaded.map((equXr, index) => {
+              return (
+                <option key={index} value={equXr.xr} label={equXr.xr}></option>
+              );
+            })}
+          </select>
+
           <div>
             <input type="submit" className="btn-submit" value="Submit" />
           </div>

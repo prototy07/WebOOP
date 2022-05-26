@@ -41,15 +41,12 @@ export function CallFalseposition(x, xl, xr) {
     return equation.evaluated;
   };
 
-  let fxL = funcFalseposition(x, xl);
-  let fxR = funcFalseposition(x, xr);
-  let run = null;
-  if ((fxL > 0 && fxR < 0) || (fxL < 0 && fxR > 0)) {
-    run = true;
-  } else {
-    run = false;
-  }
+  
+  let run = true;
+  
   while (run) {
+    let fxL = funcFalseposition(x, xl);
+    let fxR = funcFalseposition(x, xr);
     console.log("iteration =" + iteration);
     console.log("xl =" + xl);
     console.log("xr =" + xr);
@@ -101,7 +98,8 @@ export function CallFalseposition(x, xl, xr) {
       count_id++;
       iteration++;
       console.log("iteration =" + iteration);
-    } else if (fx1 * fxR < 0) {
+    } 
+    else if (fx1 * fxR < 0) {
       xl = x1;
 
       console.log("xold =" + xold);

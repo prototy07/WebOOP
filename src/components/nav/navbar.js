@@ -46,7 +46,7 @@ const Navbar = () => {
 
              </li>
              <li class="has-subnav">
-                 <Link to="#">
+                 <Link to="/Newton">
 
                      <span class="nav-text">
                          Newton Raphson
@@ -54,8 +54,8 @@ const Navbar = () => {
                  </Link>
 
              </li>
-             <li>
-                 <Link to="#">
+             <li class="has-subnav">
+                 <Link to="/Secant">
 
                      <span class="nav-text">
                          Secant

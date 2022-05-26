@@ -1,5 +1,6 @@
 import DataTable from "react-data-table-component";
 import { evaluateTex } from "tex-math-parser";
+import { derivative } from 'mathjs'
 import {
   XYPlot,
   XAxis,
@@ -30,25 +31,28 @@ const columns = [
 let dataFalse = [];
 let arrayForG = [];
 
-export function CallOnePoint(x, x0) {
+export function CallSecant(x, x0 , x1) {
   let count_id = 1;
   let iteration = 1;
   let error = null;
   
 
-  const funcFalseposition = (eq, xm) => {
+  const funcSecant = (eq, xm) => {
     const equation = evaluateTex(eq, { x: xm });
     return equation.evaluated;
   };
 
   
   
+  
   let run = true;
   
   while (run) {
-    
-    let x1 = funcFalseposition(x, x0);
-    error = Math.abs((x1-x0)/x1)
+    let fx0 = funcSecant(x,x0);
+    let fx1 = funcSecant(x, x1);
+
+    let x2 = x1 - (( fx1 * (x1-x0) ) / ( fx1 - fx0 ))
+    error = Math.abs((x2-x1)/x2)
     
     if (iteration >= 1) {
         let arraypushG = { x: iteration, y: error };
@@ -67,9 +71,10 @@ export function CallOnePoint(x, x0) {
       datapush.iteration = iteration;
       datapush.x0 = x0;
       datapush.x1 = x1;
-      datapush.error = error;
+      datapush.error = error.toFixed(10);
       dataFalse.push(datapush);
     x0 = x1
+    x1 = x2
     count_id++
     iteration++
     if (error < 0.000001) {
