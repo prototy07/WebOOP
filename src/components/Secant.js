@@ -1,31 +1,34 @@
-import React,{useState} from 'react'
+import React,{useState,useRef,useEffect} from 'react'
 import "./bisection.css";
 import { CallSecant } from './Secant-table';
 
 
 const Secant = () => {
-  const [x0, setx0] = useState("");
-  const [x1, setx1] = useState("");
-  const [result, setresult] = useState("");
-  const [eq, seteq] = useState("");
+  const [isLoaded, setIsLoaded] = useState([]);
 
-  const inputX0 = (event) => {
-    setx0(event.target.value);
-  };
+  const [result, setresult] = useState("");
   
-  const inputX1 = (event) => {
-    setx1(event.target.value);
+  const equationInputRef = useRef();
+  const xlInputRef = useRef();
+  const xrInputRef = useRef();
+
+  const sendRequest = async () => {
+    const response = await fetch("http://localhost:5000/api/get-bisection");
+    const responseData = await response.json();
+    setIsLoaded(responseData);
   };
-  const inputEQ = (event) => {
-    seteq(event.target.value)
-  }
+  useEffect(() => {
+    sendRequest();
+  }, []);
+
   const saveItem = (event) => {
     event.preventDefault();
-    let x0float = parseFloat(x0);
-    let x1float = parseFloat(x1);
-    setresult(CallSecant(eq,x0float,x1float));
-
-    
+    const enteredEquation = equationInputRef.current.value;
+    const enteredXl = xlInputRef.current.value;
+    const enteredXr = xrInputRef.current.value;
+    let xlfloat = parseFloat(enteredXl);
+    let xrfloat = parseFloat(enteredXr);
+    setresult(CallSecant(enteredEquation, xlfloat, xrfloat));
   };
 
 
@@ -38,34 +41,41 @@ const Secant = () => {
             <label>input EQ</label>
           </div>
 
-          <input
-            type="text"
-            placeholder="input EQ"
-            onChange={inputEQ}
-            value={eq}
-          />
+          <select ref={equationInputRef}>
+            {isLoaded.map((equ, index) => {
+              return (
+                <option
+                  key={index}
+                  value={equ.equation}
+                  label={equ.equation}
+                ></option>
+              );
+            })}
+          </select>
 
           <div>
             <label>input X0</label>
           </div>
 
-          <input
-            type="text"
-            placeholder="input X0"
-            onChange={inputX0}
-            value={x0}
-          />
+          <select ref={xlInputRef}>
+            {isLoaded.map((equXl, index) => {
+              return (
+                <option key={index} value={equXl.xl} label={equXl.xl}></option>
+              );
+            })}
+          </select>
 
         <div>
             <label>input X1</label>
           </div>
 
-          <input
-            type="text"
-            placeholder="input X1"
-            onChange={inputX1}
-            value={x1}
-          />
+          <select ref={xrInputRef}>
+            {isLoaded.map((equXr, index) => {
+              return (
+                <option key={index} value={equXr.xr} label={equXr.xr}></option>
+              );
+            })}
+          </select>
           
 
           

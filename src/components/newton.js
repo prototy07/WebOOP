@@ -1,29 +1,36 @@
-import React,{useState} from 'react'
+import React,{useState,useRef,useEffect} from 'react'
 import "./bisection.css";
 import { CallNewton } from './newton-table';
 
 
 
 const OnePoint = () => {
-  const [x0, setx0] = useState("");
+  const [isLoaded, setIsLoaded] = useState([]);
+  
   
   const [result, setresult] = useState("");
-  const [eq, seteq] = useState("");
-
-  const inputX0 = (event) => {
-    setx0(event.target.value);
-  };
   
-  const inputEQ = (event) => {
-    seteq(event.target.value)
-  }
+
+  const equationInputRef = useRef();
+  const xmInputRef = useRef();
+
+  const sendRequest = async () => {
+    const response = await fetch("http://localhost:5000/api/get-onePoint");
+    const responseData = await response.json();
+    setIsLoaded(responseData);
+  };
+  useEffect(() => {
+    sendRequest();
+  }, []);
+
   const saveItem = (event) => {
     event.preventDefault();
-    let x0float = parseFloat(x0);
+    const enteredEquation = equationInputRef.current.value;
+    const enteredXM = xmInputRef.current.value;
     
-    setresult(CallNewton(eq,x0float));
-
+    let xmfloat = parseFloat(enteredXM);
     
+    setresult(CallNewton(enteredEquation,xmfloat));
   };
 
 
@@ -36,23 +43,29 @@ const OnePoint = () => {
             <label>input EQ</label>
           </div>
 
-          <input
-            type="text"
-            placeholder="input EQ"
-            onChange={inputEQ}
-            value={eq}
-          />
+          <select ref={equationInputRef}>
+            {isLoaded.map((equ, index) => {
+              return (
+                <option
+                  key={index}
+                  value={equ.equation}
+                  label={equ.equation}
+                ></option>
+              );
+            })}
+          </select>
 
           <div>
             <label>input X0</label>
           </div>
 
-          <input
-            type="text"
-            placeholder="input X0"
-            onChange={inputX0}
-            value={x0}
-          />
+          <select ref={xmInputRef}>
+            {isLoaded.map((equXM, index) => {
+              return (
+                <option key={index} value={equXM.xm} label={equXM.xm}></option>
+              );
+            })}
+          </select>
           
 
           

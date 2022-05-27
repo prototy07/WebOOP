@@ -7,7 +7,7 @@ const FalsePosition2 = () => {
   const [isLoaded, setIsLoaded] = useState([]);
 
   const [result, setresult] = useState("");
-  const [eq, seteq] = useState("");
+  
   const equationInputRef = useRef();
   const xlInputRef = useRef();
   const xrInputRef = useRef();
