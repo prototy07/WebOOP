@@ -12,7 +12,6 @@
     "react-router-dom": "^5.3.1",
     "react-scripts": "5.0.1",
     "react-vis": "^1.11.7",
-    "socket.io": "^4.5.1",
     "tex-math-parser": "^2.0.3",
     "web-vitals": "^2.1.4"
   },
@@ -39,17 +38,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "description": "This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).",
-  "main": "index.js",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/THXWXT/react_numer.git"
-  },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/THXWXT/react_numer/issues"
-  },
-  "homepage": "https://github.com/THXWXT/react_numer#readme"
+  }
 }
