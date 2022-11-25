@@ -12,14 +12,7 @@ const Bisection = () => {
   const xlInputRef = useRef();
   const xrInputRef = useRef();
 
-  const sendRequest = async () => {
-    const response = await fetch("http://localhost:5000/api/get-bisection");
-    const responseData = await response.json();
-    setIsLoaded(responseData);
-  };
-  useEffect(() => {
-    sendRequest();
-  }, []);
+  
 
   const saveItem = (event) => {
     event.preventDefault();
@@ -39,17 +32,7 @@ const Bisection = () => {
             <label>input EQ</label>
           </div>
 
-          <select ref={equationInputRef}>
-            {isLoaded.map((equ, index) => {
-              return (
-                <option
-                  key={index}
-                  value={equ.equation}
-                  label={equ.equation}
-                ></option>
-              );
-            })}
-          </select>
+          {/* <input type="text" onChange={inputPB} value={pb} /> */}
 
           <div>
             <label>input XL</label>
